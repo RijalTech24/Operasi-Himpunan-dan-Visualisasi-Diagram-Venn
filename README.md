@@ -169,7 +169,7 @@ Test mencakup union, intersection, difference, complement, PIE Dataset 1, PIE Da
 
 ## Pengembangan Selanjutnya
 
-- Menambah dataset dan kategori
-- Membuat GUI/web interface
-- Menyimpan hasil analisis
-- Mengembangkan menjadi aplikasi web
+- Merapikan tampilan daftar anggota U agar tidak terpotong di terminal
+- Memeriksa ulang kualitas dataset dan menambah kasus uji
+- Merekam video demonstrasi dan menyusun materi presentasi
+- Menyusun laporan akhir
