@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment & log
+.env
+*.log
+
+# Editor
+.vscode/
+.idea/
+
+# Hasil generate Diagram Venn (folder tetap dipertahankan lewat .gitkeep)
+output/venn/*
+!output/venn/.gitkeep

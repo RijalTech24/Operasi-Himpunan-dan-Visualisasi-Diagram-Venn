@@ -1,0 +1,55 @@
+"""Membuat Diagram Venn dari dataset (angka dihitung otomatis oleh matplotlib-venn)."""
+
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output" / "venn"
+
+
+class VennError(Exception):
+    """Error saat membuat diagram (misalnya library belum terinstall)."""
+
+
+def create_venn(data, dataset_id):
+    """Buat diagram Venn 3 himpunan lalu simpan ke output/venn/<dataset_id>_venn.png.
+    Mengembalikan path file hasil.
+    """
+    try:
+        import matplotlib
+        matplotlib.use("Agg")  # simpan ke file, tidak perlu jendela GUI
+        import matplotlib.pyplot as plt
+        from matplotlib_venn import venn3
+    except ImportError:
+        raise VennError(
+            "Library matplotlib / matplotlib-venn belum terinstall.\n"
+            "  Jalankan: pip install -r requirements.txt"
+        )
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    file_path = OUTPUT_DIR / f"{dataset_id}_venn.png"
+
+    labels = (data["label_A"], data["label_B"], data["label_C"])
+    plt.figure(figsize=(8, 6))
+    # Angka di diagram dihitung dari set A, B, C -> tidak ada angka hardcode
+    venn3([data["A"], data["B"], data["C"]], set_labels=labels)
+    plt.title(f"{data['nama']}\n(Universal Set: {len(data['U'])} orang)")
+    plt.savefig(file_path, dpi=150, bbox_inches="tight")
+    plt.close()
+    return file_path
+
+
+def open_image(file_path):
+    """Coba buka gambar secara otomatis. Return True jika berhasil."""
+    try:
+        if sys.platform.startswith("win"):
+            os.startfile(file_path)
+        elif sys.platform == "darwin":
+            subprocess.run(["open", str(file_path)], check=True)
+        else:
+            subprocess.run(["xdg-open", str(file_path)], check=True,
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        return True
+    except (OSError, subprocess.SubprocessError):
+        return False

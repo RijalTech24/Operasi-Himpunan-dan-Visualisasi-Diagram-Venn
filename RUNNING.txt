@@ -1,0 +1,71 @@
+==================================================
+CARA MENJALANKAN PROJECT
+==================================================
+
+1. Clone repository
+
+   git clone <URL_REPOSITORY>
+
+2. Masuk ke folder project
+
+   cd pjbl-2-himpunan => python main.py
+
+3. Buat virtual environment
+
+   python -m venv .venv
+
+4. Aktifkan virtual environment
+
+   Windows PowerShell:
+   .venv\Scripts\Activate.ps1
+
+   Jika muncul error execution policy, pakai Command Prompt (cmd):
+   .venv\Scripts\activate.bat
+
+   (Atau jalankan di PowerShell:
+    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass)
+
+5. Install dependency
+
+   pip install -r requirements.txt
+
+6. Jalankan program
+
+   python main.py
+
+7. Jalankan testing
+
+   python -m unittest discover -s tests
+
+8. Hasil Diagram Venn
+
+   Hasil disimpan di: output/venn/
+
+==================================================
+CATATAN
+==================================================
+
+- Jangan menghapus folder data/.
+- Jangan menghapus folder src/.
+- Jika ingin menjalankan ulang, cukup: python main.py
+
+==================================================
+TROUBLESHOOTING
+==================================================
+
+- "python tidak dikenali"
+  Install Python dari python.org dan centang "Add Python to PATH".
+  Coba juga: py main.py
+
+- "pip tidak dikenali"
+  Gunakan: python -m pip install -r requirements.txt
+
+- "No module named matplotlib" / "matplotlib_venn"
+  Jalankan: pip install -r requirements.txt
+
+- Virtual environment belum aktif (tidak ada "(.venv)" di terminal)
+  Ulangi langkah 4.
+
+- "File dataset tidak ditemukan"
+  Pastikan folder data/ berisi dataset_mahasiswa.csv dan dataset_mahasiswa_2.csv,
+  dan jalankan python main.py dari dalam folder project.
